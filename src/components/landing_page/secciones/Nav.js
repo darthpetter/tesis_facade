@@ -1,7 +1,7 @@
 const Nav=()=>{
     return(
         <div className="fixed w-full">
-            <div className="grid grid-cols-2 header-title py-3 px-6 bg-white bg-opacity-70 m-2 rounded-md">
+            <div className="grid grid-cols-2 header-title py-3 px-6 bg-white bg-opacity-40 backdrop-blur-sm m-2 rounded-md">
                 <div>
                     <h1 className="text-guayaquil-600 text-3xl font-medium">Camellaya</h1>
                 </div>
