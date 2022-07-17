@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import {BASE_URL} from './URL.service';
 
-import { HandleResponse ,AuthHeader} from "../_helpers";
+import { HandleResponse,AuthHeader } from "../_helpers";
 // localhost:8000/api/auth/forgotPassword
 const currentUserSubject = new BehaviorSubject(
   JSON.parse(localStorage.getItem("currentUser"))
@@ -38,8 +38,8 @@ function login(data) {
     .then((user) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       if(user.status==200){
-        localStorage.setItem("currentUser", JSON.stringify(user.access_token));
-        currentUserSubject.next(user.access_token);
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        currentUserSubject.next(user);
       }
       return user;
     });

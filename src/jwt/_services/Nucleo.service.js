@@ -4,6 +4,7 @@ import { HandleResponse } from "../_helpers";
 export const Nucleo={
     getRolesLibres,
     getListadoSexos,
+    getListadoTiposIdentificacion,
 }
 
 function getRolesLibres(){
@@ -30,7 +31,20 @@ function getListadoSexos(){
         requestOptions
     ).then(HandleResponse)
     .then((response) => {
-        console.log("🚀 ~ file: Nucleo.service.js ~ line 32 ~ .then ~ response", response)
+        return response;
+    });
+}
+
+function getListadoTiposIdentificacion(){
+    const requestOptions={
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    }
+    return fetch(
+        `${BASE_URL()}api/lista_tipos_identificacion`,
+        requestOptions
+    ).then(HandleResponse)
+    .then((response) => {
         return response;
     });
 }

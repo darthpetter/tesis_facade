@@ -47,7 +47,7 @@ const Registro=()=>{
                     'Registro Exitoso',
                     '',
                     'success'
-                  )
+                )
             }else if(data.status===400){
                 setErrores({error:true,...data.messages});
             }
@@ -61,7 +61,10 @@ const Registro=()=>{
                     <h2 className="header-title text-2xl font-medium text-center">Camella Ya</h2>
                     {
                         errores.error &&
-                        <div className="bg-danger-500 p-2 rounded-md text-white grid grid-cols-1">
+                        <div
+                            id="errores_register" 
+                            className="bg-danger-500 p-2 rounded-md text-white grid grid-cols-1"
+                        >
                             <span>{errores.name}</span>
                             <span>{errores.password}</span>
                             <span>{errores.email}</span>
