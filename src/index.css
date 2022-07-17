@@ -10,12 +10,12 @@ html{
 }
 
 .bg-wall-pattern{
-    background-image: url('./views/assets/wall-pattern.svg');
+    background-image: url('./views/assets/backgrounds/wall-pattern.svg');
     background-repeat: repeat;
     background-size: 400px 400px;
 }
 .bg-guayas-camel{
-    background-image: url('./views/assets/guayas_camel_pattern.png');
+    background-image: url('./views/assets/backgrounds/guayas_camel_pattern.png');
     background-repeat: repeat;
     background-size: 700px;
 }
