@@ -1,5 +1,6 @@
+import Swal from "sweetalert2";
 import React,{ useState,useEffect } from "react";
-import { Roles } from "../../../jwt/_services";
+import { Roles,AuthenticationService } from "../../../jwt/_services";
 
 const Registro=()=>{
 
@@ -16,15 +17,6 @@ const Registro=()=>{
 
     const [roles,setRoles]=useState([]);
 
-   
-
-    useEffect(()=>{
-
-    },[])
-
-    
-
-
     const handleInput=(e)=>{
         setUser({
             ...user,
@@ -32,21 +24,34 @@ const Registro=()=>{
         });
         setErrores({error:false,...initialState});
     }
-    const register=async(e)=>{
+
+    useEffect(()=>{
+        getRolesLibres()
+    },[])
+
+    function getRolesLibres() {
+        Roles.getRolesLibres().then((data) => {
+            setRoles(data.roles);
+        })
+    }
+
+    
+    const register=(e)=>{
         e.preventDefault();
-        /*
-        const response=await httpService.post('/register',{
-            user:user
-        });
-        console.log("🚀 ~ file: Registro.js ~ line 26 ~ register ~ respons", response)
-        if(response.data.status===200){
-            console.log("exito");
-        }else if(response.data.status===400){
-            const errores=response.data;
-            setErrores({error:true,...errores.messages});
-            console.log("🚀 ~ file: Registro.js ~ line 26 ~ register ~ errores", errores)    
-        }
-        */
+        AuthenticationService.register(user).then(data=>{
+            console.log("🚀 ~ file: Registro.js ~ line 42 ~ AuthenticationService.register ~ data", data)
+            if(data.status===200){
+                console.log("exito");
+                setUser(initialState);
+                Swal.fire(
+                    'Registro Exitoso',
+                    '',
+                    'success'
+                  )
+            }else if(data.status===400){
+                setErrores({error:true,...data.messages});
+            }
+        })
     }
     
     return(
@@ -58,6 +63,7 @@ const Registro=()=>{
                         errores.error &&
                         <div className="bg-danger-500 p-2 rounded-md text-white grid grid-cols-1">
                             <span>{errores.name}</span>
+                            <span>{errores.password}</span>
                             <span>{errores.email}</span>
                             <span>{errores.id_rol}</span>
                         </div>
@@ -105,10 +111,11 @@ const Registro=()=>{
                             <select
                             id="id_rol"
                             name="id_rol"
-                            placeholder="¿Qué buscas?"
+                            defaultValue={0}
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-guayaquil-500 focus:border-guayaquil-500 focus:z-10 sm:text-sm"
                             onChange={(e)=>handleInput(e)}
                             >
+                                <option key='0' value='0' disabled>Seleccione un rol</option>
                             {
                                 roles.length &&
                                 roles.map(it=>(<option key={it.id} value={it.id}>{it.name}</option>))

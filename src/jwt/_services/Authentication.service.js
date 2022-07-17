@@ -10,6 +10,7 @@ const currentUserSubject = new BehaviorSubject(
 //devuelve las funciones 
 export const AuthenticationService = {
   login,
+  register,
   refresh_token,
   recuperar_clave,
   cambiar_clave,
@@ -32,7 +33,7 @@ function login(data) {
     body: JSON.stringify(data),
   };
 
-  return fetch(`${BASE_URL}auth/login`, requestOptions)
+  return fetch(`${BASE_URL()}auth/login`, requestOptions)
     .then(HandleResponse)
     .then((user) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -40,6 +41,20 @@ function login(data) {
       currentUserSubject.next(user.text);
       return user.text;
     });
+}
+
+function register(data){
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  };
+  
+  return fetch(`${BASE_URL()}api/register`, requestOptions)
+  .then(HandleResponse)
+  .then((resp) => {
+    return resp;
+  });
 }
 
 function impersonate_login_bap(data) {
