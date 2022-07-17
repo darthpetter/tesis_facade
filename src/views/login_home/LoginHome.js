@@ -29,8 +29,8 @@ export const LoginHome = () => {
 
 
     return (
-        <div className="min-w-screen min-h-screen bg-guayaquil-600 flex items-center justify-center">
-            <div className="bg-white w-3/4 lg:w-1/4 rounded-md p-4 shadow-lg">
+        <div className="min-w-screen min-h-screen bg-guayaquil-600 flex items-center justify-center bg-guayas-camel">
+            <div className="bg-white w-1/2 md:w-3/4 lg:w-1/4 rounded-md p-4 shadow-lg">
                 <div className="grid grid-cols-1 gap-4">
                     <div className="border border-gray-400 rounded-md p-3">
                         <h5 className="header-title text-guayaquil-500 text-2xl font-medium">Bienvenido</h5>

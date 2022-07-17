@@ -1,4 +1,4 @@
-import Guayas from '../assets/Guayas';
+import Guayas from '../../assets/Guayas';
 
 const Nosotros = () => {
     return (
