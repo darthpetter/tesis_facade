@@ -33,13 +33,15 @@ function login(data) {
     body: JSON.stringify(data),
   };
 
-  return fetch(`${BASE_URL()}auth/login`, requestOptions)
+  return fetch(`${BASE_URL()}api/login`, requestOptions)
     .then(HandleResponse)
     .then((user) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem("currentUser", JSON.stringify(user.text));
-      currentUserSubject.next(user.text);
-      return user.text;
+      if(user.status==200){
+        localStorage.setItem("currentUser", JSON.stringify(user.access_token));
+        currentUserSubject.next(user.access_token);
+      }
+      return user;
     });
 }
 

@@ -56,7 +56,7 @@ const Registro=()=>{
     
     return(
         <div id="registro" className="min-h-screen w-full bg-wall-pattern flex items-center justify-center">
-            <div className="bg-guayaquil-50 rounded-lg p-20 w-1/3 shadow-lg shadow-black/40">
+            <div className="bg-guayaquil-50 rounded-lg p-10 w-3/4 lg:w-1/3 shadow-lg shadow-black/40">
                 <div className="grid grid-cols-1 gap-5 justify-items-stretch">
                     <h2 className="header-title text-2xl font-medium text-center">Camella Ya</h2>
                     {
@@ -125,7 +125,7 @@ const Registro=()=>{
                     </div>
                     <button 
                     onClick={(e)=>register(e)}
-                    className="header-title text-sm text-white bg-guayaquil-600 hover:bg-guayaquil-700 focus:bg-guayaquil-400 rounded-full px-4 py-2">Registrarse</button>
+                    className="header-title text-sm text-white bg-guayaquil-600 hover:bg-guayaquil-700 focus:bg-guayaquil-400 rounded-lg px-4 py-2">Registrarse</button>
                 </div>
             </div>
         </div>
