@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import React,{ useState,useEffect } from "react";
-import { Roles,AuthenticationService } from "../../../jwt/_services";
+import { Nucleo,AuthenticationService } from "../../../jwt/_services";
 
 const Registro=()=>{
 
@@ -30,7 +30,7 @@ const Registro=()=>{
     },[])
 
     function getRolesLibres() {
-        Roles.getRolesLibres().then((data) => {
+        Nucleo.getRolesLibres().then((data) => {
             setRoles(data.roles);
         })
     }
