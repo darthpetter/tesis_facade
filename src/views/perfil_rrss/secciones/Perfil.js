@@ -6,7 +6,7 @@ import { PerfilRRSS } from "../../../jwt/_services";
 export const Perfil = (props) => {
 
     const initialState = {
-        id_tipo_identificacion: 0,
+        id_tipo_identificacion: null,
         identificacion: '',
         nombres: '',
         apellidos: '',
@@ -19,28 +19,37 @@ export const Perfil = (props) => {
         telefono2: '',
         celular1: '',
         celular2: '',
-        id_sexo: 0,
+        id_sexo: '0',
     }
 
-    const notifyParentError=props.notifyError;
+    const notifyParentError = props.notifyError;
 
     const [perfil, setPerfil] = useState(initialState)
     const [errores, setErrores] = useState(initialState)
     const [sexos, setSexos] = useState([])
     const [tipos_identificacion, setTiposIdentificacion] = useState([])
 
+    
     useEffect(() => {
         getListadoSexos()
         getListadoTiposID()
+        getDataPerfil()
     }, [])
+    
+    const getDataPerfil = async () => {
+        await PerfilRRSS.get_data_perfil()
+            .then(data => {
+                setPerfil(data.perfil)
+            })
+    }
 
     const guardar_perfil = async () => {
         await PerfilRRSS.guardar_perfil(perfil)
             .then(data => {
-                if(data.status===401){
-                    setErrores({...data.errorList})
-                    notifyParentError({...data.errorList});
-                }else if(data.status===200){
+                if (data.status === 401) {
+                    setErrores({ ...data.errorList })
+                    notifyParentError({ ...data.errorList });
+                } else if (data.status === 200) {
                     Swal.fire(
                         'Registro Exitoso',
                         '',
@@ -238,7 +247,7 @@ export const Perfil = (props) => {
                         className="p-2 focus:ring-guayaquil-500 focus:ring-1 focus:ring-opacity-40 focus:border-guayaquil-500 focus:outline-none block w-full shadow-sm border border-gray-400 rounded-md"
                     />
                 </div>
-                
+
                 <div className="grid grid-cols-1 gap-3">
                     <label
                         className="header-title text-base text-neutral-500"
@@ -266,7 +275,7 @@ export const Perfil = (props) => {
                         className="p-2 focus:ring-guayaquil-500 focus:ring-1 focus:ring-opacity-40 focus:border-guayaquil-500 focus:outline-none block w-full shadow-sm border border-gray-400 rounded-md"
                     />
                 </div>
-                
+
                 <div className="col-span-2 flex items-center justify-end">
                     <button
                         id="btn_guardar-perfil"

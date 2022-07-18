@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Swal from "sweetalert2";
 import { Icons } from "../../assets/icons/Icons"
 import { PerfilRRSS } from "../../../jwt/_services";
+import { async } from "rxjs";
 
 export const RRSS = () => {
 
@@ -14,6 +15,10 @@ export const RRSS = () => {
 
     const [rrss, setRRSS] = useState(initialState)
 
+    useEffect(()=>{
+        get_info()
+    },[])
+
     const handleRRSS = (e) => {
         setRRSS({
             ...rrss,
@@ -21,10 +26,17 @@ export const RRSS = () => {
         })
     }
 
+    const get_info = async () => {
+        await PerfilRRSS.get_data_rrss()
+            .then(data => {
+                setRRSS(data.rrss);
+            })
+    }
+
     const guardar_rrss = async () => {
         await PerfilRRSS.guardar_rrss(rrss)
             .then(data => {
-                if(data.status===200){
+                if (data.status === 200) {
                     Swal.fire(
                         'Redes Sociales Actualizadas',
                         '',
