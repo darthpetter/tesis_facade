@@ -1,9 +1,11 @@
-import { data } from "autoprefixer";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { Link, useNavigate} from "react-router-dom";
 import { AuthenticationService } from "../../jwt/_services/Authentication.service";
 
 export const LoginHome = () => {
+    const navigate=useNavigate()
+
     const [user, setUser] = useState({
         email: '',
         password: '',
@@ -23,6 +25,11 @@ export const LoginHome = () => {
             if(data.status===401){
                 setError({...data});
                 console.log(error);
+            }else if(data.status===200){
+                Swal.fire('Logeo exitoso','','success');
+                setTimeout(()=>{
+                    navigate('/perfil_rrss')
+                },300)
             }
         });
     }
